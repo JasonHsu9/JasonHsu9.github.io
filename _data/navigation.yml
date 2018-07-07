@@ -7,7 +7,7 @@ main:
   - title: "项目" # 项目的本质 其实它是分类，就是说一个项目可以创建一个分类
     url: /categories/
   - title: "GitBook"
-    url: //_pages/gitbook/
+    url: /_pages/gitbook/
   - title: "Quickstart"
     url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
   - title: "自我介绍"
