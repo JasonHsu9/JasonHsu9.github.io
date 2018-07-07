@@ -110,7 +110,7 @@ Page({
 })
 ```
 
-### WXML 还提供了两种引用文件的方式 include 和 import
+### 引用文件之 include 和 import
 
 ```html
 <!-- index.wxml -->
@@ -146,7 +146,7 @@ import 还有一个作用域的概念
 ```
 > 上面这段代码会输出 This is a.wxml，这证明了 WXML 中的模板不会循环引用
 
-### include 和 import 引入文件的区别
+### include 和 import 的区别
 
 ```html
 <!-- index.wxml -->
