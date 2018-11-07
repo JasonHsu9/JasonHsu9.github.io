@@ -21,7 +21,7 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "zh-CN"
-title                    : "徐乔丰 的博客"
+title                    : "徐乔丰"
 title_separator          : "-"
 name                     : "徐乔丰"
 description              : "一个专注于 Web 前端的网站."
