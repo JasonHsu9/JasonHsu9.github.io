@@ -3,208 +3,257 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KELEXIA | 赛博空间站</title>
+    <title>KELEXIA | GLOBAL STRATEGIC ASSET</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #00f2ff;
-            --secondary: #7000ff;
-            --accent: #ff007a;
-            --bg: #0a0a0c;
+            --gold: #C5A059;
+            --gold-dark: #8E6F3E;
+            --bg: #050505;
+            --panel: #0D0D0D;
+            --text-dim: #666;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Helvetica, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
         }
 
         body {
-            background: var(--bg);
+            background-color: var(--bg);
             color: #fff;
-            overflow-x: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 40px;
+            border: 1px solid var(--gold-dark);
+            margin: 10px;
         }
 
-        /* 动态流体背景 */
-        .background {
+        /* 顶部状态栏：纳斯克风格 */
+        .ticker-wrap {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(45deg, #0a0a0c, #1a1a2e);
+            background: #000;
+            border-bottom: 1px solid var(--gold-dark);
+            height: 30px;
             overflow: hidden;
+            z-index: 100;
         }
 
-        .blob {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(135deg, var(--secondary), var(--accent));
-            filter: blur(80px);
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: move 20s infinite alternate;
+        .ticker {
+            display: inline-block;
+            white-space: nowrap;
+            padding-right: 100%;
+            animation: ticker 30s linear infinite;
+            color: var(--gold);
+            font-size: 12px;
+            line-height: 30px;
         }
 
-        @keyframes move {
-            from { transform: translate(-10%, -10%) scale(1); }
-            to { transform: translate(20%, 20%) scale(1.2); }
+        @keyframes ticker {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
         }
 
-        /* 核心卡片 */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 3rem;
-            max-width: 800px;
-            width: 90%;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .glass-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(0, 242, 255, 0.3);
-        }
-
-        /* 头像/名称区 */
-        .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 3px solid var(--primary);
-            box-shadow: 0 0 20px var(--primary);
-            margin-bottom: 1.5rem;
-            object-fit: cover;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            background: linear-gradient(to right, #00f2ff, #7000ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-        }
-
-        .tagline {
-            color: #888;
-            font-style: italic;
-            margin-bottom: 2rem;
-        }
-
-        /* 技能标签 */
-        .skills {
+        /* 庄严的主体布局 */
+        .header {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 2.5rem;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 40px;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 20px;
         }
 
-        .skill-tag {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-
-        .skill-tag:hover {
-            background: var(--primary);
-            color: #000;
-            box-shadow: 0 0 15px var(--primary);
-            transform: scale(1.1);
-        }
-
-        /* 链接按钮 */
-        .links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-        }
-
-        .link-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 12px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
+        .identity-block h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1;
             color: #fff;
-            text-decoration: none;
-            transition: 0.3s;
-            border: 1px solid transparent;
+            margin-bottom: 10px;
         }
 
-        .link-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--accent);
-            color: var(--accent);
+        .identity-block p {
+            color: var(--gold);
+            font-size: 0.9rem;
+            font-weight: 600;
         }
 
-        /* 底部信息 */
+        .status-block {
+            text-align: right;
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+
+        /* 核心资产网格 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+            flex-grow: 1;
+        }
+
+        .panel {
+            background: var(--panel);
+            border-left: 4px solid var(--gold);
+            padding: 25px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .panel:hover {
+            background: #151515;
+            box-shadow: inset 0 0 20px rgba(197, 160, 89, 0.1);
+        }
+
+        .panel-label {
+            font-size: 11px;
+            color: var(--gold);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .panel-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .data-stream {
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            color: #333;
+            margin-top: 10px;
+            line-height: 1.2;
+        }
+
+        /* 底部操作区 */
         .footer {
-            margin-top: 3rem;
-            font-size: 0.8rem;
-            color: #555;
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+        }
+
+        .btn {
+            border: 1px solid var(--gold);
+            padding: 10px 30px;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 12px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--gold);
+            color: #000;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 900px) {
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="background">
-        <div class="blob"></div>
-        <div class="blob" style="right: -10%; bottom: -10%; background: linear-gradient(135deg, var(--primary), var(--secondary));"></div>
-    </div>
-
-    <div class="glass-card">
-        <img src="https://github.com/identicons/kelexia.png" alt="Avatar" class="avatar">
-        
-        <h1>KELEXIA</h1>
-        <p class="tagline">"在 0 与 1 的荒原里，我是一把燃烧的火炬。"</p>
-
-        <div class="skills">
-            <div class="skill-tag">RTX 4090D Powered</div>
-            <div class="skill-tag">ComfyUI Artisan</div>
-            <div class="skill-tag">WSL2 Master</div>
-            <div class="skill-tag">Python Automation</div>
-            <div class="skill-tag">Docker Containerization</div>
-        </div>
-
-        <div class="links">
-            <a href="https://github.com/你的用户名" class="link-btn">
-                <i class="fab fa-github"></i> GitHub
-            </a>
-            <a href="#" class="link-btn">
-                <i class="fas fa-terminal"></i> Workflows
-            </a>
-            <a href="#" class="link-btn">
-                <i class="fas fa-envelope"></i> Contact
-            </a>
-            <a href="#" class="link-btn">
-                <i class="fas fa-brain"></i> AI Models
-            </a>
-        </div>
-
-        <div class="footer">
-            &copy; 2026 KELEXIA. Built with ⚡ and Pure Aesthetics.
+    <div class="ticker-wrap">
+        <div class="ticker">
+            SYSTEM STATUS: OPERATIONAL // GPU LOAD: RTX 4090 D [OPTIMIZED] // NODE.JS: SYSTEM-LEVEL // WSL2: MIRRORED NETWORKING ACTIVE // ALIBABA CLOUD: DISTRIBUTED CLUSTER ONLINE // 
+            SYSTEM STATUS: OPERATIONAL // GPU LOAD: RTX 4090 D [OPTIMIZED] // NODE.JS: SYSTEM-LEVEL // WSL2: MIRRORED NETWORKING ACTIVE // ALIBABA CLOUD: DISTRIBUTED CLUSTER ONLINE // 
         </div>
     </div>
 
+    <header class="header">
+        <div class="identity-block">
+            <p>Classified Intelligence / Developer Portfolio</p>
+            <h1>KELEXIA</h1>
+            <p>Senior Technical Power User & Infrastructure Architect</p>
+        </div>
+        <div class="status-block">
+            <div id="clock">UTC 00:00:00</div>
+            <div>COORDINATES: 39°52'N 116°24'E</div>
+            <div style="color: #00ff00; margin-top: 5px;">● ENCRYPTED SESSION ACTIVE</div>
+        </div>
+    </header>
+
+    <main class="grid">
+        <div class="panel">
+            <span class="panel-label">Computing Power (Strategic)</span>
+            <div class="panel-value">NVIDIA GEFORCE RTX 4090 D</div>
+            <div class="data-stream">
+                CORE_CLK: 2520 MHZ<br>VRAM: 24GB GDDR6X<br>THERMAL_LIMIT: 84°C
+            </div>
+        </div>
+
+        <div class="panel">
+            <span class="panel-label">Core Infrastructure</span>
+            <div class="panel-value">WSL2 / UBUNTU 22.04</div>
+            <div class="data-stream">
+                NET_MODE: MIRRORED<br>KERNEL: 5.15.133.1-MICROSOFT<br>MEMORY_LIMIT: 32768MB
+            </div>
+        </div>
+
+        <div class="panel">
+            <span class="panel-label">Alibaba Cloud Assets</span>
+            <div class="panel-value">14x ECS CLUSTER</div>
+            <div class="data-stream">
+                IOPS: MAX_ULTRA_DISK<br>THROUGHPUT: 15.6GB/S<br>MOUNT: OCFS2 SHARED
+            </div>
+        </div>
+
+        <div class="panel">
+            <span class="panel-label">AI Workflow Stack</span>
+            <div class="panel-value">COMFYUI / FLUX / OLLAMA</div>
+            <div class="data-stream">
+                LORA_TRAINING: ACTIVE<br>CHECKPOINT_DEPLOYED: TRUE<br>LATENCY: 12ms
+            </div>
+        </div>
+
+        <div class="panel" style="border-left-color: #555;">
+            <span class="panel-label">Automation Protocols</span>
+            <div class="panel-value">SHELL / PYTHON / VBS</div>
+            <div class="data-stream">
+                ROOT_ACCESS: ENABLED<br>TASK_RUNNER: FASTAPI BACKEND<br>SCHEDULE: CRON_ACTIVE
+            </div>
+        </div>
+
+        <div class="panel" style="border-left-color: #555;">
+            <span class="panel-label">Identity Verification</span>
+            <div class="panel-value">Surface Pro 7</div>
+            <div class="data-stream">
+                UID: KELEXIA_GLOBAL<br>AUTH: RSA_4096_SECURE<br>STATUS: VERIFIED
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div>
+            <a href="https://github.com/你的用户名" class="btn">ACCESS REPOSITORY</a>
+            <a href="#" class="btn" style="margin-left: 10px;">VIEW LOGS</a>
+        </div>
+        <div style="font-size: 10px; color: #444;">
+            NOTICE: UNAUTHORIZED ACCESS TO THIS TERMINAL IS PROHIBITED.
+        </div>
+    </footer>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const time = now.toISOString().split('T')[1].split('.')[0];
+            document.getElementById('clock').innerText = 'UTC ' + time;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
 </body>
 </html>
